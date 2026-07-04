@@ -2,7 +2,11 @@ name: Supply-Chain Watch
 
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    # Approximate every 3.5 days: two alternating schedules
+    #  → Day 1,4,8,11,15,18,22,25,29 at 03:17
+    #  → Day 4,8,11,15,18,22,25,29 at 15:17 (offset by ~3.5 days)
+    - cron: '17 3 1,4,8,11,15,18,22,25,29 * *'
+    - cron: '17 15 4,8,11,15,18,22,25,29 * *'
   workflow_dispatch:
 
 concurrency:
